@@ -8,35 +8,36 @@ To write a program to implement the the Logistic Regression Model to Predict the
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1.Import the standard libraries such as pandas module to read the corresponding csv file.
 
-2.Upload the dataset values and check for any null or duplicated values using .isnull() and .duplicated() function respectively.
+1.Import the required packages and print the present data.
 
-3.Import LabelEncoder and encode the corresponding dataset values.
+2.Print the placement data and salary data.
 
-4.Import LogisticRegression from sklearn and apply the model on the dataset using train and test values of x and y and Predict the values of array using the variable y_pred.
+3.Find the null and duplicate values.
 
-5.Calculate the accuracy, confusion and the classification report by importing the required modules such as accuracy_score, confusion_matrix and the classification_report from sklearn.metrics module.
+4.Using logistic regression find the predicted values of accuracy , confusion matrices.
 
-6.Apply new unknown values and print all the acqirred values for accuracy, confusion and the classification report.
+5.Display the results
 
 ## Program:
-
+```
 /*
 Program to implement the the Logistic Regression Model to Predict the Placement Status of Student.
 Developed by: YUVA SREE M
-RegisterNumber: 212223230251
+RegisterNumber:  212223230251
 */
-
-
 import pandas as pd
-data=pd.read_csv('Placement_Data.csv')
+data=pd.read_csv("Placement_Data.csv")
 data.head()
+
 data1=data.copy()
-data1=data1.drop(["sl_no","salary"],axis=1)
+data1=data1.drop(["sl_no","salary"],axis=1)#Browses the specified row or column
 data1.head()
+
 data1.isnull().sum()
+
 data1.duplicated().sum()
+
 from sklearn.preprocessing import LabelEncoder
 le=LabelEncoder()
 data1["gender"]=le.fit_transform(data1["gender"])
@@ -45,69 +46,73 @@ data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
 data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
 data1["degree_t"]=le.fit_transform(data1["degree_t"])
 data1["workex"]=le.fit_transform(data1["workex"])
-data1["specialisation"]=le.fit_transform(data1["specialisation"])
-data1["status"]=le.fit_transform(data1["status"])
+data1["specialisation"]=le.fit_transform(data1["specialisation"] )     
+data1["status"]=le.fit_transform(data1["status"])       
 data1
+
 x=data1.iloc[:,:-1]
 x
 y=data1["status"]
 y
+
 from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
-from sklearn.linear_model import LogisticRegression 
-lr=LogisticRegression(solver ="liblinear")
+
+from sklearn.linear_model import LogisticRegression
+lr=LogisticRegression(solver="liblinear")
 lr.fit(x_train,y_train)
-y_pred = lr.predict(x_test)
+y_pred=lr.predict(x_test)
 y_pred
+
 from sklearn.metrics import accuracy_score
 accuracy=accuracy_score(y_test,y_pred)
 accuracy
+
 from sklearn.metrics import confusion_matrix
 confusion=confusion_matrix(y_test,y_pred)
 confusion
+
 from sklearn.metrics import classification_report
-classification_report1=classification_report(y_test,y_pred)
+classification_report1 = classification_report(y_test,y_pred)
 print(classification_report1)
 lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
-
+```
 
 ## Output:
 
-### op1:
-![op1](https://github.com/user-attachments/assets/d07cee59-e41b-40af-a0e4-34b2e127d155)
+## DATA HEAD
+![Screenshot 2025-03-27 144229](https://github.com/user-attachments/assets/f1f948cd-7a83-46ac-bc24-eb4d1ca10bbb)
 
-### op2:
-![op2](https://github.com/user-attachments/assets/8daa5378-fdd8-41d5-a2fc-a2d2add7b69f)
+## DATA1 HEAD
+![Screenshot 2025-03-27 144307](https://github.com/user-attachments/assets/1aa2c32b-f6f2-4fa9-8286-24e18d190fdc)
 
-### op3:
-![op3](https://github.com/user-attachments/assets/6099b552-b79c-4789-8097-8e9e9b8d9782)
+## ISNULL().SUM()
+![Screenshot 2025-03-27 144341](https://github.com/user-attachments/assets/9499215e-6483-4041-9bb6-ab8f96cdccba)
 
-### op4:
-![op4](https://github.com/user-attachments/assets/95a6f42d-cbb5-4140-b5b8-26249dcb9f52)
+## DATA DUPLICATE
+![Screenshot 2025-03-27 144358](https://github.com/user-attachments/assets/c7387294-2a85-40e8-aaf6-7cbecdba7232)
 
-### op5:
-![op5](https://github.com/user-attachments/assets/5dc1e92c-206d-4999-a78c-5cc492c5bd6e)
+## PRINT DATA
+![Screenshot 2025-03-27 144419](https://github.com/user-attachments/assets/97a37dfb-5e22-47ac-a358-a3c0674842ff)
 
-### op6:
-![op6](https://github.com/user-attachments/assets/252280ad-1d4c-4b25-aaf0-bb85b0ae8f7b)
+## STATUS
+![Screenshot 2025-03-27 144434](https://github.com/user-attachments/assets/0972b01c-40fc-4f97-9e06-b189f0e8a8e1)
 
-### op7:
-![op7](https://github.com/user-attachments/assets/a4dac4b5-1234-4187-b3c7-129d2ae81f9f)
+## Y_PRED
+![Screenshot 2025-03-27 144451](https://github.com/user-attachments/assets/716c6219-7077-4115-99ff-6371608feb53)
 
-### op8:
-![op8](https://github.com/user-attachments/assets/09c13a2f-14f0-4f16-b546-3b971987b57e)
+## ACCURACY
+![Screenshot 2025-03-27 144506](https://github.com/user-attachments/assets/c03dbc91-7981-42bd-b68c-cb618d8aaae9)
 
-### op9:
-![op10](https://github.com/user-attachments/assets/b9cfc82b-187a-4742-ba56-1946b1531dbf)
+## CONFUSION MATRIX
+![Screenshot 2025-03-27 144521](https://github.com/user-attachments/assets/6068d2d9-ee59-4cf5-bf58-7ba07b351fad)
 
-### op 10:
-![op 11](https://github.com/user-attachments/assets/b40f1ff9-74cc-4396-9b0a-917b00171f72)
+## CLASSIFICATION
+![Screenshot 2025-03-27 144534](https://github.com/user-attachments/assets/8d0529ac-9d5f-4fa6-9ce5-6f23bced3436)
 
-### op 11:
-![op12](https://github.com/user-attachments/assets/82f5add4-33ae-49c4-b495-2653bc1fa14e)
+## LR PREDICT
+![Screenshot 2025-03-27 144559](https://github.com/user-attachments/assets/e73d7d65-82f3-4c48-886d-235a17a90913)
 
-### op 12:
-![op13](https://github.com/user-attachments/assets/4a578676-52fc-420c-9152-f7289d334cbc)
 
 
 ## Result:
